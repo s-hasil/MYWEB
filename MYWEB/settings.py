@@ -27,7 +27,7 @@ SECRET_KEY = 'nreye___c!xs8icmzla!=)9b922w%n6xsv&_%r!qs*6azvsgh2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://joyboy-yckt.onrender.com']
 
 
 # Application definition
