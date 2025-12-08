@@ -1,10 +1,176 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>BUG REPORTS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bug Reports - ProWebSec</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>ProWebSec</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="{% url 'index' %}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'about' %}" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'service' %}" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'pricing' %}" class="nav-link">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'bug_reports' %}" class="nav-link active">Bug Reports</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
 
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Bug Reports</h1>
+                <p>Help us improve by reporting any issues you encounter</p>
+            </div>
+        </section>
+
+        <section class="contact-content">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-form-section">
+                        <h2>Report a Bug</h2>
+                        <form class="contact-form" action="{% url 'bug_reports' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="name">Your Name *</label>
+                                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bug_type">Bug Type</label>
+                                <select id="bug_type" name="bug_type">
+                                    <option value="">Select bug type</option>
+                                    <option value="visual">Visual/UI Issue</option>
+                                    <option value="functional">Functional Issue</option>
+                                    <option value="performance">Performance Issue</option>
+                                    <option value="security">Security Concern</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="page_url">Page URL</label>
+                                <input type="text" id="page_url" name="page_url" placeholder="Which page has the issue?">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Bug Description *</label>
+                                <textarea id="description" name="description" rows="6" placeholder="Please describe the issue in detail. Include steps to reproduce if possible." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Bug Report</button>
+                        </form>
+                    </div>
+
+                    <div class="contact-info-section">
+                        <h2>Reporting Guidelines</h2>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-bug"></i>
+                                <div>
+                                    <h3>Be Specific</h3>
+                                    <p>Describe exactly what happened and what you expected to happen.</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-list-ol"></i>
+                                <div>
+                                    <h3>Include Steps</h3>
+                                    <p>List the steps to reproduce the issue so we can investigate effectively.</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-desktop"></i>
+                                <div>
+                                    <h3>Browser Info</h3>
+                                    <p>Let us know which browser and device you're using.</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-camera"></i>
+                                <div>
+                                    <h3>Screenshots</h3>
+                                    <p>If possible, describe or attach screenshots of the issue.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            <h3>Alternative Contact</h3>
+                            <p style="color: #64748b; margin-bottom: 1rem;">For urgent security issues, contact us directly:</p>
+                            <p style="color: #64748b;"><i class="fas fa-envelope"></i> cursedspirit8921@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <h2>Thank You for Helping Us Improve</h2>
+                <p>Your bug reports help us deliver a better experience for everyone.</p>
+                <a href="{% url 'index' %}" class="btn btn-primary">Back to Home</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ProWebSec</h3>
+                    <p>Your trusted partner in web development & security</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'service' %}">Services</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +91 9072597815</p>
+                    <p><i class="fas fa-envelope"></i> cursedspirit8921@gmail.com</p>
+                    <p><i class="fas fa-envelope"></i> abhishyanthvs7@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ProWebSec. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'script.js' %}"></script>
 </body>
 </html>
