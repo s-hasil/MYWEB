@@ -18,9 +18,15 @@ from django.urls import path
 
 from django.contrib import admin
 from django.urls import path
-from main.views import home
+from main.views import index, about, service, contact, pricing, thank_you, bug_reports
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),  # Homepage
+    path('', index, name='index'),
+    path('about/', about, name='about'),
+    path('service/', service, name='service'),
+    path('contact/', contact, name='contact'),
+    path('pricing/', pricing, name='pricing'),
+    path('thank-you/', thank_you, name='thank_you'),
+    path('bug_reports/',bug_reports, name='bug_reports'),
 ]

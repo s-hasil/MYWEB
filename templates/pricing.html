@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - ProWebSec</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>ProWebSec</span>
+            </div>
+            <ul class="nav-menu">
+    <li class="nav-item">
+        <a href="{% url 'index' %}" class="nav-link">Home</a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{% url 'about' %}" class="nav-link">About Us</a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{% url 'service' %}" class="nav-link">Services</a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{% url 'pricing' %}" class="nav-link">Pricing</a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{% url 'bug_reports' %}" class="nav-link">Bug Reports</a>
+    </li>
+</ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Pricing</h1>
+                <p>Your trusted partner in web development and security</p>
+            </div>
+        </section>
+
+        <section class="Package Pricing">
+            <div class="container">
+                <section class="pricing">
+                    <div class="container">
+                        <h2>Professional & Secure Websites — Choose Your Package</h2>
+                        <p>Whether you need a simple landing page or a fully secured business website, we have a package for you.</p>
+
+                        <div class="pricing-grid">
+                           <!-- Bronze -->
+<a class="btn" href="contact.html?service=Bronze%20—%20Starter%20Site">Get Started</a>
+
+<!-- Silver -->
+<a class="btn" href="contact.html?service=Silver%20—%20Business%20Site%20+%20Security">Request Quote</a>
+
+<!-- Gold -->
+<a class="btn" href="contact.html?service=Gold%20—%20Premium%20+%20Maintenance">Buy Maintenance</a>
+                            </div>
+                        </div>
+
+                        <div class="maintenance">
+                            <h4>Maintenance Plans</h4>
+                            <p><strong>Basic:</strong> ₹300/month — weekly backups + monthly updates</p>
+                            <p><strong>Pro:</strong> ₹800/month — backups, malware scan, uptime monitoring, priority support</p>
+                            <p><small>All packages include 2 free revisions. Work begins after 50% advance.</small></p>
+                        </div>
+                    </div>
+
+        </section>
+
+        <section class="team">
+            <div class="container">
+                <h2>Meet Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Abhishyanth</h3>
+                        <p>Founder & Lead Developer</p>
+                        <p>Web Development & Security Expert</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>ProWebSec Team</h3>
+                        <p>Web Development Specialists</p>
+                        <p>Business Industry Focus</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Security Experts</h3>
+                        <p>Vulnerability Assessment</p>
+                        <p>Security Patch Management</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ProWebSec</h3>
+                    <p>Your trusted partner in web development & security</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'service' %}">Services</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +91 9072597815</p>
+                    <p><i class="fas fa-envelope"></i> cursedspirit8921@gmail.com</p>
+                    <p><i class="fas fa-envelope"></i> abhishyanthvs7@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ProWebSec. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

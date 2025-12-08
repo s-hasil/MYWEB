@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProWebSec - Affordable Websites & Web Security For Your Business</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>ProWebSec</span>
+            </div>
+            <ul class="nav-menu">
+    <li class="nav-item">
+        <a href="{% url 'index' %}" class="nav-link">Home</a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{% url 'about' %}" class="nav-link">About Us</a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{% url 'service' %}" class="nav-link">Services</a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{% url 'pricing' %}" class="nav-link">Pricing</a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{% url 'bug_reports' %}" class="nav-link">Bug Reports</a>
+    </li>
+           </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Affordable Websites & Web Security for Your Business</h1>
+                <p class="hero-subtitle">Professional web development and security services designed specifically for businesses. Get your business online with confidence.</p>
+                <div class="hero-buttons">
+                    <a href="{% url 'service' %}" class="btn btn-primary">Our Services</a>
+                    <a href="{% url 'contact' %}" class="btn btn-secondary">Get Quote</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-house">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="intro">
+            <div class="container">
+                <h2>Welcome to ProWebSec</h2>
+                <p>We specialize in creating affordable, professional websites for businesses and providing comprehensive web security services. Our mission is to help businesses establish a strong online presence without breaking the bank. From custom website development to vulnerability assessments and security patches, we ensure your digital presence is both professional and secure.</p>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <a href="{% url 'service' %} class="feature-card feature-link">
+                        <i class="fas fa-code"></i>
+                        <h3>Custom Website Development</h3>
+                        <p>Professional, responsive websites tailored specifically for businesses at affordable prices.</p>
+                        <div class="feature-cta">
+                            <span>Learn More →</span>
+                        </div>
+                    </a>
+                    <a href="{% url 'service' %} class="feature-card feature-link">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Web Security Services</h3>
+                        <p>Comprehensive vulnerability assessments and security patches to protect your online presence.</p>
+                        <div class="feature-cta">
+                            <span>Learn More →</span>
+                        </div>
+                    </a>
+                    <a href="{% url 'service' %}" class="feature-card feature-link">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h3>Affordable Solutions</h3>
+                        <p>High-quality web services at competitive prices designed for businesses.</p>
+                        <div class="feature-cta">
+                            <span>Learn More →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ProWebSec</h3>
+                    <p>Your trusted partner in web development & security</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'service' %}">Services</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +91 9072597815</p>
+                    <p><i class="fas fa-envelope"></i> cursedspirit8921@gmail.com</p>
+                    <p><i class="fas fa-envelope"></i> abhishyanthvs7@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ProWebSec. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
