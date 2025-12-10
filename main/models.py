@@ -11,3 +11,14 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return self.name
+
+class BugReport(models.Model):
+    name = models.CharField( max_length=200 )
+    email = models.EmailField()
+    bug_type= models.CharField(max_length=50)
+    page_url= models.CharField(max_length=300, blank=True , null=True)
+    description = models.TextField()
+    date_submitted = models.DateTimeField( auto_now_add=True )
+
+    def __str__(self):
+        return self.name

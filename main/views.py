@@ -30,7 +30,7 @@ def contact(request):
             service=service,
             message=message
         )
-        return redirect('contact')  # or redirect to a thank you page
+        return redirect('thank_you')  # or redirect to a thank you page
 
     return render(request, 'contact.html')
 
@@ -42,5 +42,24 @@ def pricing(request):
 
 
 
+from django.shortcuts import render, redirect
+from .models import BugReport
+
 def bug_reports(request):
-    return render(request, 'bug_reports.html')
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        bug_type = request.POST.get("bug_type")
+        page_url = request.POST.get("page_url")
+        description = request.POST.get("description")
+
+        BugReport.objects.create(
+            name=name,
+            email=email,
+            bug_type=bug_type,
+            page_url=page_url,
+            description=description
+        )
+        return redirect("thank_you")  # put your success page name
+
+    return render(request, "bug_reports.html")
