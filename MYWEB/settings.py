@@ -26,9 +26,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'nreye___c!xs8icmzla!=)9b922w%n6xsv&_%r!qs*6azvsgh2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
-ALLOWED_HOSTS = ['prowebsec.in','www.prowebsec.in','q344agw0.up.railway.app']
+# Only list trusted hosts; do not use wildcard
+ALLOWED_HOSTS = [
+    'prowebsec.in',
+    'www.prowebsec.in',
+    'q344agw0.up.railway.app',
+    '127.0.0.1',
+    'localhost',
+]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://*.replit.dev',
@@ -45,7 +52,7 @@ X_FRAME_OPTIONS = 'ALLOWALL'  # Required for Replit iframe preview
 SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
 
 # Session Security
-SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
+SESSION_COOKIE_SECURE = not DEBUG  # True in production, False in local dev
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_HTTPONLY = True
@@ -60,6 +67,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
     'main',
 ]
 
@@ -70,6 +83,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -152,5 +166,55 @@ STORAGES = {
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Authentication Settings
+SITE_ID = 1
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/index/'
+LOGOUT_REDIRECT_URL = '/login/'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': ['profile', 'email'],
+        'APP': {
+            'client_id': os.environ.get('GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_ID'),
+            'secret': os.environ.get('GOOGLE_CLIENT_SECRET', 'GOOGLE_CLIENT_SECRET'),
+            'key': ''
+        }
+    },
+    'github': {
+        'SCOPE': ['user:email'],
+        'APP': {
+            'client_id': os.environ.get('GITHUB_CLIENT_ID', 'GITHUB_CLIENT_ID'),
+            'secret': os.environ.get('GITHUB_CLIENT_SECRET', 'GITHUB_CLIENT_SECRET'),
+            'key': ''
+        }
+    }
+}
+
+#MEDIA
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Email settings for password reset
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'ProWebSec <no-reply@example.com>')
+
 
 

@@ -437,38 +437,95 @@ function addDynamicStyles() {
     document.head.appendChild(style);
 }
 
+// Theme Toggle Functionality
+(function() {
+    'use strict';
+    
+    let themeInitialized = false;
+    
+    function initTheme() {
+        if (themeInitialized) return;
+        themeInitialized = true;
+        
+        const html = document.documentElement;
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        
+        if (!html) return;
+        
+        // Get saved theme or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+        
+        // Update icon based on theme
+        function updateIcon(theme) {
+            if (themeIcon) {
+                themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            }
+        }
+        
+        // Initialize icon
+        updateIcon(savedTheme);
+        
+        // Toggle theme on click
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateIcon(newTheme);
+            });
+        }
+    }
+    
+    // Run when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTheme);
+    } else {
+        initTheme();
+    }
+})();
+
 // Initialize all elements on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Add dynamic styles
-    addDynamicStyles();
-    
-    // Add security badge
-    setTimeout(addSecurityBadge, 1000);
-    
-    // Setup scroll animations
-    const animatedElements = document.querySelectorAll(
-        '.feature-card, .service-card, .value-card, .team-member, .step, ' +
-        '.pricing-card, .maintenance-card, .guideline-card, .contact-item'
-    );
-    
-    animatedElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transitionDelay = `${index * 0.1}s`;
-        observer.observe(el);
-    });
-    
-    // Initialize effects
-    parallaxEffect();
-    addMouseTracking();
-    addRippleEffect();
-    addScrollProgress();
-    enhanceFormValidation();
-    lazyLoadImages();
-    addBackToTop();
-    
-    // Active nav link highlighting
-    highlightActiveNavLink();
+    try {
+        // Add dynamic styles
+        addDynamicStyles();
+        
+        // Add security badge
+        setTimeout(addSecurityBadge, 1000);
+        
+        // Setup scroll animations
+        const animatedElements = document.querySelectorAll(
+            '.feature-card, .service-card, .value-card, .team-member, .step, ' +
+            '.pricing-card, .maintenance-card, .guideline-card, .contact-item'
+        );
+        
+        if (animatedElements.length > 0) {
+            animatedElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transitionDelay = `${index * 0.1}s`;
+                observer.observe(el);
+            });
+        }
+        
+        // Initialize effects
+        parallaxEffect();
+        addMouseTracking();
+        addRippleEffect();
+        addScrollProgress();
+        enhanceFormValidation();
+        lazyLoadImages();
+        addBackToTop();
+        
+        // Active nav link highlighting
+        highlightActiveNavLink();
+    } catch (error) {
+        console.error('Error initializing page:', error);
+    }
 });
 
 // Highlight current page in navigation

@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ProWebSec - Affordable Websites & Web Security For Your Business{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    {% with rp=request.path %}
+    {% if "/accounts/login" not in rp and "/accounts/signup" not in rp and "/accounts/google" not in rp and "/accounts/github" not in rp %}
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>ProWebSec</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="{% url 'index' %}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'about' %}" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'service' %}" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'pricing' %}" class="nav-link">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'bug_reports' %}" class="nav-link">Bug Reports</a>
+                </li>
+            </ul>
+            <div class="nav-right">
+                <div class="nav-auth">
+                    {% if user.is_authenticated %}
+                        <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+                            <i class="fas fa-moon" id="themeIcon"></i>
+                        </button>
+                        <a href="{% url 'profile' %}" class="nav-icon-link" title="Profile">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                        <a href="{% url 'logout' %}" class="nav-icon-link" title="Logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    {% else %}
+                        <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+                            <i class="fas fa-moon" id="themeIcon"></i>
+                        </button>
+                        <a href="{% url 'login' %}" class="nav-link">Login</a>
+                        <a href="{% url 'register' %}" class="btn btn-primary btn-small">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+    {% endwith %}
+
+    {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-circle{% else %}info-circle{% endif %}"></i>
+                    <span>{{ message }}</span>
+                    <button class="alert-close" onclick="this.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ProWebSec</h3>
+                    <p>Your trusted partner in web development & security</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'service' %}">Services</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +91 9072597815</p>
+                    <p><i class="fas fa-envelope"></i> joyboyser@gmail.com</p>
+                    <p><i class="fas fa-envelope"></i> abhishyanthvs7@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ProWebSec. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'script.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+

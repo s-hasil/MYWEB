@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% load socialaccount %}
+
+{% block title %}Register - ProWebSec{% endblock %}
+{% block body_class %}auth-page register-page{% endblock %}
+
+{% block content %}
+<section class="auth-shell">
+  <div class="auth-card-wide">
+    <div class="auth-left-pane">
+      <h1>Create your account</h1>
+      <p>Join us and get started with a modern, secure experience.</p>
+    </div>
+    <div class="auth-right-pane">
+      <div class="auth-card-inner">
+        <h2>Sign Up</h2>
+        {% if form.non_field_errors %}
+          <div class="alert alert-error">{{ form.non_field_errors }}</div>
+        {% endif %}
+        <form method="post" class="auth-form">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">Username</label>
+            {{ form.username }}
+            {% if form.username.errors %}<div class="form-error">{{ form.username.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">Email</label>
+            {{ form.email }}
+            {% if form.email.errors %}<div class="form-error">{{ form.email.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.password1.id_for_label }}">Password</label>
+            {{ form.password1 }}
+            {% if form.password1.errors %}<div class="form-error">{{ form.password1.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}<div class="form-error">{{ form.password2.errors.0 }}</div>{% endif %}
+          </div>
+          <button type="submit" class="btn-primary full">Create Account</button>
+        </form>
+
+        <div class="oauth-divider"><span>or continue with</span></div>
+        <div class="oauth-grid">
+          <a class="btn oauth google" href="{% provider_login_url 'google' %}">
+            <span class="oauth-icon google-icon"></span>
+            <span>Continue with Google</span>
+          </a>
+          <a class="btn oauth github" href="{% provider_login_url 'github' %}">
+            <span class="oauth-icon github-icon"></span>
+            <span>Continue with GitHub</span>
+          </a>
+        </div>
+
+        <p class="auth-switch">Already have an account? <a href="{% url 'account_login' %}">Login</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

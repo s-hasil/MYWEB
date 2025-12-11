@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% load socialaccount %}
+
+{% block title %}Login - ProWebSec{% endblock %}
+{% block body_class %}auth-page login-page{% endblock %}
+
+{% block content %}
+<section class="auth-shell">
+  <div class="auth-card-wide">
+    <div class="auth-left-pane">
+      <h1>Welcome back!</h1>
+      <p>Sign in to continue to your account.</p>
+    </div>
+    <div class="auth-right-pane">
+      <div class="auth-card-inner">
+        <h2>Login</h2>
+        {% if form.non_field_errors %}
+          <div class="alert alert-error">{{ form.non_field_errors }}</div>
+        {% endif %}
+        <form method="post" class="auth-form">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="id_login">Email</label>
+            {{ form.login }}
+            {% if form.login.errors %}<div class="form-error">{{ form.login.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="form-group">
+            <label for="id_password">Password</label>
+            {{ form.password }}
+            {% if form.password.errors %}<div class="form-error">{{ form.password.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="form-footer-row">
+            <a href="{% url 'password_reset' %}" class="link-muted">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn-primary full">Login</button>
+        </form>
+
+        <div class="oauth-divider"><span>or continue with</span></div>
+        <div class="oauth-grid">
+          <a class="btn oauth google" href="{% provider_login_url 'google' %}">
+            <span class="oauth-icon google-icon"></span>
+            <span>Continue with Google</span>
+          </a>
+          <a class="btn oauth github" href="{% provider_login_url 'github' %}">
+            <span class="oauth-icon github-icon"></span>
+            <span>Continue with GitHub</span>
+          </a>
+        </div>
+
+        <p class="auth-switch">New here? <a href="{% url 'account_signup' %}">Create an account</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

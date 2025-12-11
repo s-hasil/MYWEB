@@ -2,8 +2,9 @@ Django==4.2
 gunicorn
 whitenoise
 setuptools
-Django==4.2
-gunicorn
-whitenoise
 dj-database-url
 psycopg2-binary
+django-allauth
+openai
+PyJWT
+cryptography

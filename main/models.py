@@ -18,6 +18,7 @@ class BugReport(models.Model):
     bug_type= models.CharField(max_length=50)
     page_url= models.CharField(max_length=300, blank=True , null=True)
     description = models.TextField()
+    screenshot = models.ImageField(upload_to='screenshot/', blank=True, null=True)
     date_submitted = models.DateTimeField( auto_now_add=True )
 
     def __str__(self):
